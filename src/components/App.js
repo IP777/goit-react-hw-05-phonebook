@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import shortid from "shortid";
+import { CSSTransition } from "react-transition-group";
 //---------------------------------------
-import Section from "./Section";
-import Contacts from "./Contact/Contacts";
-import AddContactForm from "./ContactForm/AddContactForm";
-import ContactFilter from "./ContactFilter";
+import Contacts from "./contact/Contacts";
+import AddContactForm from "./contactForm/AddContactForm";
+//import ContactFilter from "./ContactFilter";
 //import data from "./Data/fakeData.json";
+import PhonebookTitle from "./phonebookTitle/PhonebookTitle";
+import InputTitle from "./inputTitle/InputTitle";
+import popTransition from "./transition/pop.module.css";
 
 const filterContacts = (contacts, filter) => {
 	return contacts.filter((contact) =>
@@ -47,7 +50,7 @@ export default class App extends Component {
 		}));
 	};
 
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate() {
 		localStorage.setItem("contact", JSON.stringify(this.state.contacts));
 	}
 
@@ -68,22 +71,22 @@ export default class App extends Component {
 
 		return (
 			<>
-				<Section title="Phonebook">
-					<AddContactForm addContact={this.addContact} />
-				</Section>
+				<PhonebookTitle name="Phonebook" />
+				<AddContactForm addContact={this.addContact} />
 
-				<Section title="Contacts">
-					{(contacts.length > 2 || filter) && (
-						<ContactFilter
+				{(contacts.length > 2 || filter) && (
+					<CSSTransition timeout={250} classNames={popTransition}>
+						<InputTitle
+							title="Find contacts by name"
 							value={filter}
-							onChangeFilter={this.changeFilter}
+							handleChange={this.changeFilter}
 						/>
-					)}
-					<Contacts
-						contacts={filteredContacts}
-						onRemoveContact={this.removeContact}
-					/>
-				</Section>
+					</CSSTransition>
+				)}
+				<Contacts
+					contacts={filteredContacts}
+					onRemoveContact={this.removeContact}
+				/>
 			</>
 		);
 	}

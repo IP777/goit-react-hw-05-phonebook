@@ -4,7 +4,8 @@ import { validateAll, validations } from "indicative/validator";
 import faker from "faker";
 //----------------------------
 import style from "./AddContactForm.module.css";
-import ErrorNotification from "./../ErrorNotification";
+import InputTitle from "./../inputTitle/InputTitle";
+import ErrorNotification from "../ErrorNotification";
 
 const rules = {
 	//regex -регулярка на наличие букв a-z, A-Z, а-я, А-Я
@@ -31,9 +32,8 @@ export default class AddContactForm extends Component {
 		const { name, number } = this.state;
 
 		validateAll({ name, number }, rules, messages)
-			.then((data) => {
+			.then(() => {
 				this.props.addContact({ name, number });
-				//this.saveData();
 				this.reset();
 			})
 			.catch((errors) => {
@@ -58,11 +58,6 @@ export default class AddContactForm extends Component {
 		const fakeNumber = faker.phone.phoneNumberFormat();
 
 		this.setState({ name: fakeName, number: fakeNumber });
-
-		// this.props.addContact({
-		// 	name: fakeName,
-		// 	number: fakeNumber,
-		// });
 	};
 
 	reset = () => {
@@ -75,35 +70,19 @@ export default class AddContactForm extends Component {
 		return (
 			<>
 				<form onSubmit={this.handleSubmit} className={style.form}>
-					<label className={style.title}>
-						Name
-						<input
-							className={style.formInput}
-							value={name}
-							type="text"
-							placeholder="Enter login"
-							onChange={this.handleChange}
-							name="name"
-						/>
-						{errors && (
-							<ErrorNotification errorType={errors.name} />
-						)}
-					</label>
+					<InputTitle
+						title="Name"
+						value={name}
+						handleChange={this.handleChange}
+					/>
+					{errors && <ErrorNotification errorType={errors.name} />}
 
-					<label className={style.title}>
-						Number
-						<input
-							className={style.formInput}
-							value={number}
-							type="text"
-							placeholder="Enter number"
-							onChange={this.handleChange}
-							name="number"
-						/>
-						{errors && (
-							<ErrorNotification errorType={errors.number} />
-						)}
-					</label>
+					<InputTitle
+						title="Number"
+						value={number}
+						handleChange={this.handleChange}
+					/>
+					{errors && <ErrorNotification errorType={errors.number} />}
 
 					<button type="submit" className={style.submitBtn}>
 						Add contact

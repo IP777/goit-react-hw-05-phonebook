@@ -1,24 +1,34 @@
 import React from "react";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+//------------------------------------------
 import style from "./Contacts.module.css";
+import popTransition from "./../transition/pop.module.css";
 
 const Contacts = ({ contacts, onRemoveContact }) => {
 	return (
-		<ul className={style.list}>
+		<TransitionGroup component="ul" className={style.list}>
 			{contacts.map(({ id, name, number, newItem }) => (
-				<li
+				<CSSTransition
 					key={id}
-					className={newItem ? style.newComponent : style.component}
+					timeout={250}
+					classNames={popTransition}
 				>
-					{name}: {number}
-					<input
-						type="button"
-						value="Delete"
-						onClick={() => onRemoveContact(id)}
-						className={style.btn}
-					/>
-				</li>
+					<li
+						className={
+							newItem ? style.newComponent : style.component
+						}
+					>
+						{name}: {number}
+						<input
+							type="button"
+							value="Delete"
+							onClick={() => onRemoveContact(id)}
+							className={style.btn}
+						/>
+					</li>
+				</CSSTransition>
 			))}
-		</ul>
+		</TransitionGroup>
 	);
 };
 
