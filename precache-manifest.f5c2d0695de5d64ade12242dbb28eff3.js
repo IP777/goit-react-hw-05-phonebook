@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "48166f346c43c542573f6f6aa11484cd",
+    "revision": "bd4222dc95d80565e1f849e28f9498ef",
     "url": "/goit-react-hw-05-phonebook/index.html"
   },
   {
-    "revision": "c86a56fb9d1ed9311a49",
+    "revision": "c9da0265a19cf19be5ca",
     "url": "/goit-react-hw-05-phonebook/static/css/main.a689531d.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/goit-react-hw-05-phonebook/static/js/2.f52162ff.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c86a56fb9d1ed9311a49",
-    "url": "/goit-react-hw-05-phonebook/static/js/main.ada50316.chunk.js"
+    "revision": "c9da0265a19cf19be5ca",
+    "url": "/goit-react-hw-05-phonebook/static/js/main.0ebf1ecf.chunk.js"
   },
   {
     "revision": "ac1d358c2b2cc3e1f318",
