@@ -5,7 +5,12 @@ import Contacts from "./contact/Contacts";
 import AddContactForm from "./contactForm/AddContactForm";
 import PhonebookTitle from "./phonebookTitle/PhonebookTitle";
 import SearchForm from "./searchForm/SearchForm";
-import AlertWindow from "./alertWindow/AlertWindow";
+//import AlertWindow from "./alertWindow/AlertWindow";
+import { CSSTransition } from "react-transition-group";
+import openTransition from "./transition/open.module.css";
+//import popTransition from "./transition/pop.module.css";
+import style from "./alertWindow//AlertWindow.module.css";
+//import InputTitle from "./inputTitle/InputTitle";
 
 const filterContacts = (contacts, filter) => {
 	return contacts.filter((contact) =>
@@ -18,7 +23,6 @@ export default class App extends Component {
 		contacts: [],
 		filter: "",
 		alertWindow: false,
-		alertWindowDelay: 250,
 	};
 
 	changeFilter = (e) => {
@@ -29,8 +33,7 @@ export default class App extends Component {
 		const { name } = contact;
 
 		if (this.state.contacts.find((i) => i.name === name)) {
-			//alert(`${name} is already in contacts`);
-			this.alertToggle();
+			this.setState({ alertWindow: true });
 		} else {
 			const contactToAdd = {
 				...contact,
@@ -41,17 +44,7 @@ export default class App extends Component {
 			this.setState((state) => ({
 				contacts: [contactToAdd, ...state.contacts],
 			}));
-			this.setState({ alert: false });
 		}
-	};
-
-	alertToggle = () => {
-		this.setState({ alertWindow: true });
-
-		setTimeout(() => {
-			this.setState({ alertWindow: false });
-			console.log(this.state.alertWindow);
-		}, this.state.alertWindowDelay);
 	};
 
 	removeContact = (id) => {
@@ -73,11 +66,11 @@ export default class App extends Component {
 				contacts: [...convrtArr],
 			}));
 		}
-		console.log("componentDidMount");
+		this.setState({ onLoad: true });
 	}
 
 	render() {
-		const { contacts, filter, alertWindow, alertWindowDelay } = this.state;
+		const { contacts, filter, alertWindow } = this.state;
 		const filteredContacts = filterContacts(contacts, filter);
 
 		return (
@@ -97,11 +90,19 @@ export default class App extends Component {
 					onRemoveContact={this.removeContact}
 				/>
 
-				<AlertWindow
-					delay={alertWindowDelay}
-					toggle={alertWindow}
-					text={`Contact already exists!`}
-				/>
+				<CSSTransition
+					timeout={250}
+					classNames={openTransition}
+					in={alertWindow}
+					onEnter={() => {
+						setTimeout(() => {
+							this.setState({ alertWindow: false });
+						}, 250);
+					}}
+					unmountOnExit
+				>
+					<div className={style.window}>Contact already exists!</div>
+				</CSSTransition>
 			</>
 		);
 	}
