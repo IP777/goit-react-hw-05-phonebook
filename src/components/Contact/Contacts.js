@@ -2,29 +2,27 @@ import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 //------------------------------------------
 import style from "./Contacts.module.css";
-import popTransition from "./../transition/pop.module.css";
+import slideTransition from "./../transition/slide.module.css";
 
 const Contacts = ({ contacts, onRemoveContact }) => {
 	return (
 		<TransitionGroup component="ul" className={style.list}>
-			{contacts.map(({ id, name, number, newItem }) => (
+			{contacts.map(({ id, name, number }) => (
 				<CSSTransition
 					key={id}
 					timeout={250}
-					classNames={popTransition}
+					classNames={slideTransition}
+					unmountOnExit
 				>
-					<li
-						className={
-							newItem ? style.newComponent : style.component
-						}
-					>
-						{name}: {number}
-						<input
-							type="button"
-							value="Delete"
+					<li className={style.cardWrapper}>
+						{name}
+						<span>{number}</span>
+						<button
 							onClick={() => onRemoveContact(id)}
-							className={style.btn}
-						/>
+							className={style.cardBtn}
+						>
+							&#10006;
+						</button>
 					</li>
 				</CSSTransition>
 			))}

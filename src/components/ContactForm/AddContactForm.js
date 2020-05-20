@@ -5,7 +5,7 @@ import faker from "faker";
 //----------------------------
 import style from "./AddContactForm.module.css";
 import InputTitle from "./../inputTitle/InputTitle";
-import ErrorNotification from "../ErrorNotification";
+import ErrorNotification from "./../errorNotification/ErrorNotification";
 
 const rules = {
 	//regex -регулярка на наличие букв a-z, A-Z, а-я, А-Я
@@ -74,6 +74,7 @@ export default class AddContactForm extends Component {
 						title="Name"
 						value={name}
 						handleChange={this.handleChange}
+						placeholder="Write name..."
 					/>
 					{errors && <ErrorNotification errorType={errors.name} />}
 
@@ -81,20 +82,23 @@ export default class AddContactForm extends Component {
 						title="Number"
 						value={number}
 						handleChange={this.handleChange}
+						placeholder="Write phone..."
 					/>
 					{errors && <ErrorNotification errorType={errors.number} />}
 
-					<button type="submit" className={style.submitBtn}>
-						Add contact
-					</button>
+					<div>
+						<button type="submit" className={style.submitBtn}>
+							Add contact
+						</button>
 
-					<button
-						type="button"
-						className={style.submitBtn}
-						onClick={this.handleFake}
-					>
-						Generate fake contact
-					</button>
+						<button
+							type="button"
+							className={style.submitBtn}
+							onClick={this.handleFake}
+						>
+							Generate fake contact
+						</button>
+					</div>
 				</form>
 			</>
 		);

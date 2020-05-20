@@ -1,27 +1,27 @@
-.component {
-	margin: 5px 0;
-}
-
-.newComponent {
-	margin: 5px 0;
-	color: chocolate;
-}
-
 .list {
-	margin: 0;
+	list-style: none;
 	padding: 0;
-	padding-left: 16px;
-	width: 300px;
 }
 
-.btn {
-	margin-left: 10px;
-	background-color: #ffffff;
-	border: 1px solid darkgray;
+.cardWrapper {
+	display: flex;
+	justify-content: space-between;
+	width: 350px;
+	padding: 17px 8px;
+	margin-bottom: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
+}
+
+.cardBtn {
+	padding: 5px 8px;
+	border-radius: 3px;
+	background-color: #da4545;
+	color: #ffffff;
+	border: 0;
 	cursor: pointer;
 }
 
-.btn:hover {
-	background-color: darkgray;
+.cardBtn:hover {
+	background-color: #c53e3e;
 	color: #ffffff;
 }
