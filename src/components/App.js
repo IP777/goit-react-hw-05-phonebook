@@ -88,13 +88,13 @@ export default class App extends Component {
 				/>
 
 				<CSSTransition
-					timeout={500}
+					timeout={1000}
 					classNames={openTransition}
 					in={alertWindow}
 					onEnter={() => {
 						setTimeout(() => {
 							this.setState({ alertWindow: false });
-						}, 500);
+						}, 1000);
 					}}
 					unmountOnExit
 				>
