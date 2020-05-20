@@ -5,12 +5,9 @@ import Contacts from "./contact/Contacts";
 import AddContactForm from "./contactForm/AddContactForm";
 import PhonebookTitle from "./phonebookTitle/PhonebookTitle";
 import SearchForm from "./searchForm/SearchForm";
-//import AlertWindow from "./alertWindow/AlertWindow";
 import { CSSTransition } from "react-transition-group";
 import openTransition from "./transition/open.module.css";
-//import popTransition from "./transition/pop.module.css";
 import style from "./alertWindow//AlertWindow.module.css";
-//import InputTitle from "./inputTitle/InputTitle";
 
 const filterContacts = (contacts, filter) => {
 	return contacts.filter((contact) =>
